@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { UserRole } from '../types';
 import { LayoutDashboard, BookOpen, Users, Award, Settings, LogOut, Brain, Search } from './ui/Icons';
@@ -8,31 +9,33 @@ interface SidebarProps {
   setIsOpen: (isOpen: boolean) => void;
   activeTab: string;
   onNavigate: (tab: string) => void;
+  onLogout: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ role, isOpen, setIsOpen, activeTab, onNavigate }) => {
+const Sidebar: React.FC<SidebarProps> = ({ role, isOpen, setIsOpen, activeTab, onNavigate, onLogout }) => {
   const getLinks = () => {
     switch (role) {
       case UserRole.ADMIN:
         return [
-          { id: 'overview', icon: LayoutDashboard, label: 'Overview' },
-          { id: 'users', icon: Users, label: 'User Management' },
-          { id: 'courses', icon: BookOpen, label: 'All Courses' },
-          { id: 'certificates', icon: Award, label: 'Certificates' },
-          { id: 'analytics', icon: Brain, label: 'AI Analytics' },
+          { id: 'overview', icon: LayoutDashboard, label: 'Ringkasan' },
+          { id: 'users', icon: Users, label: 'Manajemen Pengguna' },
+          { id: 'courses', icon: BookOpen, label: 'Semua Kursus' },
+          { id: 'certificates', icon: Award, label: 'Sertifikat' },
+          { id: 'analytics', icon: Brain, label: 'Analitik AI' },
         ];
       case UserRole.INSTRUCTOR:
         return [
-          { id: 'dashboard', icon: LayoutDashboard, label: 'Dashboard' },
-          { id: 'courses', icon: BookOpen, label: 'My Courses' },
-          { id: 'students', icon: Users, label: 'Students' },
-          { id: 'content', icon: Brain, label: 'AI Content Gen' },
+          { id: 'dashboard', icon: LayoutDashboard, label: 'Dasbor' },
+          { id: 'courses', icon: BookOpen, label: 'Kursus Saya' },
+          { id: 'students', icon: Users, label: 'Siswa' },
+          { id: 'content', icon: Brain, label: 'Generasi Konten AI' },
         ];
       case UserRole.LEARNER:
         return [
-          { id: 'learning', icon: LayoutDashboard, label: 'My Learning' },
-          { id: 'browse', icon: Search, label: 'Browse Courses' },
-          { id: 'achievements', icon: Award, label: 'Achievements' },
+          { id: 'learning', icon: LayoutDashboard, label: 'Pembelajaran Saya' },
+          { id: 'ai-writer', icon: Brain, label: 'Executive Summary AI' },
+          { id: 'browse', icon: Search, label: 'Jelajahi Kursus' },
+          { id: 'achievements', icon: Award, label: 'Pencapaian' },
         ];
       default:
         return [];
@@ -64,7 +67,7 @@ const Sidebar: React.FC<SidebarProps> = ({ role, isOpen, setIsOpen, activeTab, o
 
         <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
           <div className="mb-4 px-2 text-xs font-semibold text-slate-400 uppercase tracking-wider">
-            {role} Portal
+            Portal {role}
           </div>
           {links.map((link) => (
             <button
@@ -88,11 +91,14 @@ const Sidebar: React.FC<SidebarProps> = ({ role, isOpen, setIsOpen, activeTab, o
         <div className="p-4 border-t border-slate-100">
           <button className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">
             <Settings className="w-5 h-5" />
-            Settings
+            Pengaturan
           </button>
-          <button className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+          <button 
+            onClick={onLogout}
+            className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+          >
             <LogOut className="w-5 h-5" />
-            Logout
+            Keluar
           </button>
         </div>
       </aside>

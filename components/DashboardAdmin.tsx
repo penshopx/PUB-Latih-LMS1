@@ -40,8 +40,8 @@ const DashboardAdmin: React.FC<DashboardAdminProps> = ({ activeTab, setActiveTab
     <div className="space-y-6 animate-in fade-in duration-500">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Admin Portal</h1>
-          <p className="text-slate-500">Manage system, users, and analytics.</p>
+          <h1 className="text-2xl font-bold text-slate-900">Portal Admin</h1>
+          <p className="text-slate-500">Kelola sistem, pengguna, dan analitik.</p>
         </div>
         
         {/* Tabs */}
@@ -50,13 +50,13 @@ const DashboardAdmin: React.FC<DashboardAdminProps> = ({ activeTab, setActiveTab
             onClick={() => setActiveTab('overview')}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${currentView === 'overview' ? 'bg-white text-indigo-600 shadow-sm' : 'text-slate-600 hover:text-slate-900'}`}
           >
-            Overview
+            Ringkasan
           </button>
           <button 
             onClick={() => setActiveTab('users')}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${currentView === 'users' ? 'bg-white text-indigo-600 shadow-sm' : 'text-slate-600 hover:text-slate-900'}`}
           >
-            User Management
+            Manajemen Pengguna
           </button>
         </div>
       </div>
@@ -64,15 +64,15 @@ const DashboardAdmin: React.FC<DashboardAdminProps> = ({ activeTab, setActiveTab
       {currentView === 'overview' ? (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <StatCard title="Total Users" value={users.length} change={12} icon={Users} color="bg-blue-500" />
-            <StatCard title="Active Courses" value={courses.length} change={5} icon={BookOpen} color="bg-indigo-500" />
-            <StatCard title="Certificates Issued" value={certificates.length} change={24} icon={Award} color="bg-amber-500" />
-            <StatCard title="AI Interactions" value="150k+" change={35} icon={TrendingUp} color="bg-purple-500" />
+            <StatCard title="Total Pengguna" value={users.length} change={12} icon={Users} color="bg-blue-500" />
+            <StatCard title="Kursus Aktif" value={courses.length} change={5} icon={BookOpen} color="bg-indigo-500" />
+            <StatCard title="Sertifikat Terbit" value={certificates.length} change={24} icon={Award} color="bg-amber-500" />
+            <StatCard title="Interaksi AI" value="150k+" change={35} icon={TrendingUp} color="bg-purple-500" />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-              <h3 className="text-lg font-semibold text-slate-900 mb-6">User Engagement Trend</h3>
+              <h3 className="text-lg font-semibold text-slate-900 mb-6">Tren Keterlibatan Pengguna</h3>
               <div className="h-[300px] w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={MOCK_ANALYTICS}>
@@ -95,7 +95,7 @@ const DashboardAdmin: React.FC<DashboardAdminProps> = ({ activeTab, setActiveTab
             </div>
 
             <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-              <h3 className="text-lg font-semibold text-slate-900 mb-6">Course Category Distribution</h3>
+              <h3 className="text-lg font-semibold text-slate-900 mb-6">Distribusi Kategori Kursus</h3>
               <div className="h-[300px] w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={COURSE_DISTRIBUTION}>
@@ -121,7 +121,7 @@ const DashboardAdmin: React.FC<DashboardAdminProps> = ({ activeTab, setActiveTab
                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                <input 
                  type="text" 
-                 placeholder="Search users..." 
+                 placeholder="Cari pengguna..." 
                  value={searchTerm}
                  onChange={(e) => setSearchTerm(e.target.value)}
                  className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 outline-none"
@@ -133,7 +133,7 @@ const DashboardAdmin: React.FC<DashboardAdminProps> = ({ activeTab, setActiveTab
                  Filter
                </button>
                <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700">
-                 Add User
+                 Tambah Pengguna
                </button>
              </div>
           </div>
@@ -143,11 +143,11 @@ const DashboardAdmin: React.FC<DashboardAdminProps> = ({ activeTab, setActiveTab
             <table className="w-full text-left text-sm">
               <thead className="bg-slate-50 text-slate-500 border-b border-slate-200">
                 <tr>
-                  <th className="px-6 py-4 font-medium">User</th>
-                  <th className="px-6 py-4 font-medium">Role</th>
+                  <th className="px-6 py-4 font-medium">Pengguna</th>
+                  <th className="px-6 py-4 font-medium">Peran</th>
                   <th className="px-6 py-4 font-medium">Status</th>
-                  <th className="px-6 py-4 font-medium">Last Login</th>
-                  <th className="px-6 py-4 font-medium text-right">Actions</th>
+                  <th className="px-6 py-4 font-medium">Login Terakhir</th>
+                  <th className="px-6 py-4 font-medium text-right">Aksi</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -158,7 +158,7 @@ const DashboardAdmin: React.FC<DashboardAdminProps> = ({ activeTab, setActiveTab
                         <img src={user.avatar} alt="" className="w-10 h-10 rounded-full object-cover" />
                         <div>
                           <p className="font-medium text-slate-900">{user.name}</p>
-                          <p className="text-xs text-slate-500">{user.email || 'No email'}</p>
+                          <p className="text-xs text-slate-500">{user.email || 'Tanpa email'}</p>
                         </div>
                       </div>
                     </td>
@@ -177,7 +177,7 @@ const DashboardAdmin: React.FC<DashboardAdminProps> = ({ activeTab, setActiveTab
                       </div>
                     </td>
                     <td className="px-6 py-4 text-slate-500">
-                      {user.lastLogin ? user.lastLogin.toLocaleDateString() : 'Never'}
+                      {user.lastLogin ? user.lastLogin.toLocaleDateString() : 'Belum pernah'}
                     </td>
                     <td className="px-6 py-4 text-right">
                       <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -188,7 +188,7 @@ const DashboardAdmin: React.FC<DashboardAdminProps> = ({ activeTab, setActiveTab
                           <button 
                             onClick={() => toggleUserStatus(user.id)}
                             className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg" 
-                            title="Deactivate"
+                            title="Nonaktifkan"
                           >
                             <Ban className="w-4 h-4" />
                           </button>
@@ -196,7 +196,7 @@ const DashboardAdmin: React.FC<DashboardAdminProps> = ({ activeTab, setActiveTab
                            <button 
                              onClick={() => toggleUserStatus(user.id)}
                              className="p-2 text-slate-400 hover:text-green-600 hover:bg-green-50 rounded-lg" 
-                             title="Activate"
+                             title="Aktifkan"
                            >
                             <UserCheck className="w-4 h-4" />
                           </button>

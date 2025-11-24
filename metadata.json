@@ -1,5 +1,7 @@
 {
   "name": "PUB-Latih AI LMS",
   "description": "A next-generation Learning Management System featuring AI-driven content generation, personalized tutoring, and comprehensive analytics for Admins, Instructors, and Learners.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [
+    "microphone"
+  ]
 }

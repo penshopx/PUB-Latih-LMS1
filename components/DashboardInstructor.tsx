@@ -1,8 +1,10 @@
+
 import React, { useState, useEffect } from 'react';
-import { Plus, Video, FileText, Brain, MoreVertical, Users, Radio, Search, Filter, Mail, AlertCircle } from './ui/Icons';
+import { Plus, Video, FileText, Brain, MoreVertical, Users, Radio, Search, Filter, Mail, AlertCircle, TrendingUp, Zap } from './ui/Icons';
 import { COURSES, MOCK_STUDENT_PROGRESS } from '../constants';
 import { Course } from '../types';
 import CourseBuilder from './CourseBuilder';
+import AIContentGenerator from './AIContentGenerator';
 import { useLms } from '../context/LmsContext';
 
 interface DashboardInstructorProps {
@@ -13,9 +15,8 @@ interface DashboardInstructorProps {
 const DashboardInstructor: React.FC<DashboardInstructorProps> = ({ activeTab, setActiveTab }) => {
   const { courses } = useLms();
   const [view, setView] = useState<'dashboard' | 'builder'>('dashboard');
-  const [editingCourse, setEditingCourse] = useState<Course | null>(null);
+  const [editingCourse, setEditingCourse] = useState<Partial<Course> | null>(null);
 
-  // Sync internal view with top-level tabs if needed
   useEffect(() => {
     if (activeTab === 'dashboard' || activeTab === 'courses') {
       setView('dashboard');
@@ -30,6 +31,13 @@ const DashboardInstructor: React.FC<DashboardInstructorProps> = ({ activeTab, se
   const handleEditCourse = (course: Course) => {
     setEditingCourse(course);
     setView('builder');
+  };
+
+  const handleCreateFromAI = (data: any) => {
+    setEditingCourse(data);
+    setView('builder');
+    // Switch active tab context to courses so sidebar highlight is correct for course building
+    setActiveTab('courses');
   };
 
   if (view === 'builder') {
@@ -49,17 +57,20 @@ const DashboardInstructor: React.FC<DashboardInstructorProps> = ({ activeTab, se
     );
   }
 
-  // Determine which sub-tab content to show based on activeTab
-  // 'dashboard' and 'courses' show the course list. 'students' shows students.
-  const showCourses = activeTab === 'dashboard' || activeTab === 'courses' || activeTab === 'content';
+  // New Feature: Dedicated AI Content Generator View
+  if (activeTab === 'content') {
+      return <AIContentGenerator onCreateCourse={handleCreateFromAI} />;
+  }
+
+  const showCourses = activeTab === 'dashboard' || activeTab === 'courses';
   const showStudents = activeTab === 'students';
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Instructor Dashboard</h1>
-          <p className="text-slate-500">Manage your courses, students, and live sessions.</p>
+          <h1 className="text-2xl font-bold text-slate-900">Dasbor Instruktur</h1>
+          <p className="text-slate-500">Kelola kursus, siswa, dan sesi langsung Anda.</p>
         </div>
         
         <div className="flex gap-4">
@@ -68,13 +79,13 @@ const DashboardInstructor: React.FC<DashboardInstructorProps> = ({ activeTab, se
               onClick={() => setActiveTab('courses')}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${showCourses ? 'bg-white text-indigo-600 shadow-sm' : 'text-slate-600 hover:text-slate-900'}`}
             >
-              My Courses
+              Kursus Saya
             </button>
             <button 
               onClick={() => setActiveTab('students')}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${showStudents ? 'bg-white text-indigo-600 shadow-sm' : 'text-slate-600 hover:text-slate-900'}`}
             >
-              Students
+              Siswa
             </button>
           </div>
 
@@ -84,7 +95,7 @@ const DashboardInstructor: React.FC<DashboardInstructorProps> = ({ activeTab, se
               className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-600/20"
             >
               <Plus className="w-4 h-4" />
-              <span className="hidden sm:inline">New Course</span>
+              <span className="hidden sm:inline">Kursus Baru</span>
             </button>
           )}
         </div>
@@ -94,40 +105,58 @@ const DashboardInstructor: React.FC<DashboardInstructorProps> = ({ activeTab, se
         <>
           {/* Stats Row */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-             <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl p-6 text-white shadow-lg">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="p-3 bg-white/20 rounded-lg">
-                    <Users className="w-6 h-6" />
-                  </div>
-                  <span className="text-xs bg-white/20 px-2 py-1 rounded-full">+12%</span>
+             <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl p-6 text-white shadow-lg relative overflow-hidden">
+                <div className="relative z-10">
+                    <div className="flex items-start justify-between mb-4">
+                    <div className="p-3 bg-white/20 rounded-lg">
+                        <Users className="w-6 h-6" />
+                    </div>
+                    <span className="text-xs bg-white/20 px-2 py-1 rounded-full">+12%</span>
+                    </div>
+                    <h3 className="text-indigo-100 text-sm font-medium">Total Siswa</h3>
+                    <p className="text-3xl font-bold">2,845</p>
                 </div>
-                <h3 className="text-indigo-100 text-sm font-medium">Total Students</h3>
-                <p className="text-3xl font-bold">2,845</p>
-             </div>
-             <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="p-3 bg-orange-100 text-orange-600 rounded-lg">
-                    <Radio className="w-6 h-6" />
-                  </div>
-                  <span className="text-xs font-medium text-slate-400">Next Session</span>
+                <div className="absolute -bottom-4 -right-4 text-white/10">
+                    <TrendingUp className="w-24 h-24" />
                 </div>
-                <h3 className="text-slate-500 text-sm font-medium">Upcoming Live Class</h3>
-                <p className="text-lg font-bold text-slate-900">AI Ethics Panel</p>
-                <p className="text-xs text-slate-400">Today, 4:00 PM</p>
              </div>
+             
+             {/* AI Insights Card */}
+             <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-20 h-20 bg-yellow-100 rounded-bl-full -mr-4 -mt-4 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                <div className="flex items-start justify-between mb-4 relative z-10">
+                  <div className="p-3 bg-yellow-100 text-yellow-600 rounded-lg">
+                    <Brain className="w-6 h-6" />
+                  </div>
+                  <span className="text-xs font-bold text-yellow-600 bg-yellow-50 px-2 py-1 rounded-full flex items-center gap-1">
+                    <Zap className="w-3 h-3 fill-current" />
+                    Wawasan AI
+                  </span>
+                </div>
+                <h3 className="text-slate-500 text-sm font-medium">Prediksi Keterlibatan</h3>
+                <p className="text-lg font-bold text-slate-900 mt-1">Risiko Tinggi: 3 Siswa</p>
+                <p className="text-xs text-slate-400 mt-1">Berdasarkan skor kuis & aktivitas.</p>
+                <button 
+                    onClick={() => setActiveTab('students')}
+                    className="mt-3 text-xs font-medium text-indigo-600 hover:text-indigo-800 hover:underline"
+                >
+                    Lihat Detail
+                </button>
+             </div>
+
              <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
                 <div className="flex items-start justify-between mb-4">
                   <div className="p-3 bg-green-100 text-green-600 rounded-lg">
                     <Brain className="w-6 h-6" />
                   </div>
                 </div>
-                <h3 className="text-slate-500 text-sm font-medium">Avg. Quiz Score</h3>
+                <h3 className="text-slate-500 text-sm font-medium">Rata-rata Skor Kuis</h3>
                 <p className="text-3xl font-bold text-slate-900">88%</p>
              </div>
           </div>
 
           {/* Course Grid */}
-          <h2 className="text-lg font-bold text-slate-900 pt-4">My Courses</h2>
+          <h2 className="text-lg font-bold text-slate-900 pt-4">Kursus Saya</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             {courses.map((course: Course) => (
               <div key={course.id} className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden group hover:shadow-md transition-shadow">
@@ -142,7 +171,7 @@ const DashboardInstructor: React.FC<DashboardInstructorProps> = ({ activeTab, se
                        onClick={() => handleEditCourse(course)}
                        className="px-4 py-2 bg-white rounded-lg text-sm font-bold text-slate-900 shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all hover:bg-slate-50"
                      >
-                       Manage Course
+                       Kelola Kursus
                      </button>
                   </div>
                 </div>
@@ -178,14 +207,14 @@ const DashboardInstructor: React.FC<DashboardInstructorProps> = ({ activeTab, se
                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                <input 
                  type="text" 
-                 placeholder="Search student name..." 
+                 placeholder="Cari nama siswa..." 
                  className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 outline-none"
                />
              </div>
              <div className="flex gap-2">
                <button className="flex items-center gap-2 px-4 py-2 border border-slate-200 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50">
                  <Filter className="w-4 h-4" />
-                 Status: All
+                 Status: Semua
                </button>
              </div>
            </div>
@@ -195,12 +224,12 @@ const DashboardInstructor: React.FC<DashboardInstructorProps> = ({ activeTab, se
              <table className="w-full text-left text-sm">
                 <thead className="bg-slate-50 text-slate-500 border-b border-slate-200">
                   <tr>
-                    <th className="px-6 py-4 font-medium">Student</th>
-                    <th className="px-6 py-4 font-medium">Enrolled Course</th>
-                    <th className="px-6 py-4 font-medium">Progress</th>
-                    <th className="px-6 py-4 font-medium">Quiz Avg.</th>
+                    <th className="px-6 py-4 font-medium">Siswa</th>
+                    <th className="px-6 py-4 font-medium">Kursus Terdaftar</th>
+                    <th className="px-6 py-4 font-medium">Progres</th>
+                    <th className="px-6 py-4 font-medium">Rata-rata Kuis</th>
                     <th className="px-6 py-4 font-medium">Status</th>
-                    <th className="px-6 py-4 font-medium text-right">Action</th>
+                    <th className="px-6 py-4 font-medium text-right">Aksi</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">

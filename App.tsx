@@ -8,11 +8,12 @@ import AIChatbot from './components/AIChatbot';
 import CoursePlayer from './components/CoursePlayer';
 import CourseDetail from './components/CourseDetail';
 import CertificateView from './components/CertificateView';
+import LandingPage from './components/LandingPage';
 import { UserRole, Course, Certificate } from './types';
 import { Menu, Bell, Search } from './components/ui/Icons';
 
 // Inner App Component to consume Context
-const AppContent = () => {
+const AppContent = ({ onLogout }: { onLogout: () => void }) => {
   const { currentUser, setCurrentUser, users, courses, certificates, enrollCourse, getStudentProgress } = useLms();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   
@@ -62,7 +63,8 @@ const AppContent = () => {
       return (
         <CoursePlayer 
           course={selectedCourse} 
-          onBack={handleBackToDashboard} 
+          onBack={handleBackToDashboard}
+          onViewCertificate={handleViewCertificate}
         />
       );
     }
@@ -103,6 +105,7 @@ const AppContent = () => {
             setDashboardTab(tab);
             setActiveView('dashboard'); // Ensure we are on dashboard when clicking sidebar
           }}
+          onLogout={onLogout}
         />
 
         {/* Main Content Area */}
@@ -192,9 +195,15 @@ const AppContent = () => {
 
 // Root App Component
 function App() {
+  const [showLanding, setShowLanding] = useState(true);
+
+  if (showLanding) {
+    return <LandingPage onEnter={() => setShowLanding(false)} />;
+  }
+
   return (
     <LmsProvider>
-      <AppContent />
+      <AppContent onLogout={() => setShowLanding(true)} />
     </LmsProvider>
   );
 }

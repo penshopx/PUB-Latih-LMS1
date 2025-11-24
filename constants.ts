@@ -61,55 +61,55 @@ export const USERS: User[] = [
 export const COURSES: Course[] = [
   {
     id: 'c1',
-    title: 'Ahli K3 Konstruksi (Sertifikasi)',
-    description: 'Penerapan Sistem Manajemen Keselamatan dan Kesehatan Kerja (SMK3) pada proyek konstruksi sesuai Permen PUPR No. 10/2021.',
+    title: 'Ahli K3 & 4KL Konstruksi Berkelanjutan',
+    description: 'Penerapan Kesehatan, Keselamatan, Keberlanjutan, dan Lingkungan (4KL) pada proyek konstruksi modern sesuai standar global.',
     instructor: 'Ir. Budi Santoso, MT',
     thumbnail: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800&auto=format&fit=crop',
     progress: 45,
-    category: 'K3 & Keselamatan',
+    category: 'K3 & 4KL',
     studentsEnrolled: 1240,
     rating: 4.8,
     modules: [
       { 
         id: 'm1', 
-        title: 'Pengantar SMK3 Konstruksi', 
+        title: 'Pengantar 4KL dalam Konstruksi', 
         type: 'video', 
         duration: '15:00', 
         isCompleted: true,
         videoUrl: 'https://www.youtube.com/embed/mock1', 
-        transcript: "Selamat datang di modul Pengantar SMK3. \n\n[00:30] Sektor konstruksi memiliki risiko kecelakaan kerja yang tinggi. Oleh karena itu, penerapan K3 bukan hanya kewajiban hukum, tapi kebutuhan moral.\n\n[02:00] Dasar hukum yang kita gunakan meliputi UU No. 1 Tahun 1970 dan PP No. 50 Tahun 2012 tentang Penerapan SMK3."
+        transcript: "Selamat datang di modul Pengantar 4KL. \n\n[00:30] Konstruksi modern tidak hanya soal fisik, tapi juga Kesehatan, Keselamatan, Keberlanjutan, dan Lingkungan.\n\n[02:00] Kita akan membahas standar ISO 45001 dan ISO 14001 serta implementasinya di lapangan."
       },
       { 
         id: 'm2', 
-        title: 'Identifikasi Bahaya & Penilaian Risiko', 
+        title: 'Identifikasi Bahaya & Dampak Lingkungan', 
         type: 'text', 
         duration: '20:00', 
         isCompleted: false,
-        textContent: "# IBPR (Identifikasi Bahaya dan Penilaian Risiko)\n\nIBPR adalah fondasi dari rencana K3L. Langkah-langkahnya adalah:\n\n1. **Identifikasi**: Menemukan potensi bahaya (fisik, kimia, ergonomi).\n2. **Penilaian**: Menghitung *Likelihood* (kemungkinan) x *Severity* (keparahan).\n3. **Pengendalian**: Hierarki pengendalian (Eliminasi, Substitusi, Engineering, Admin, APD).\n\n## Studi Kasus: Pekerjaan Galian\n- **Bahaya**: Longsor dinding tanah.\n- **Risiko**: Pekerja tertimbun (Fatality).\n- **Pengendalian**: Pemasangan turap (sheet pile) dan *sloping*."
+        textContent: "# IBPR & Aspek Lingkungan\n\nIdentifikasi Bahaya dan Penilaian Risiko (IBPR) kini terintegrasi dengan Analisis Dampak Lingkungan.\n\n1. **Kesehatan**: Ergonomi dan Higiene Industri.\n2. **Keselamatan**: Pencegahan kecelakaan kerja.\n3. **Keberlanjutan**: Efisiensi sumber daya dan material hijau.\n4. **Lingkungan**: Pengelolaan limbah B3 dan polusi proyek."
       },
       {
         id: 'm3', 
-        title: 'Uji Kompetensi Dasar K3', 
+        title: 'Uji Kompetensi Dasar 4KL', 
         type: 'quiz', 
         duration: '30:00', 
         isCompleted: false,
         quizData: {
           id: 'q1',
-          title: 'Evaluasi Pemahaman K3 Dasar',
+          title: 'Evaluasi Pemahaman 4KL',
           questions: [
             {
               id: 'qz1',
+              text: 'Apa kepanjangan dari 4KL dalam konteks konstruksi berkelanjutan?',
+              type: 'mcq',
+              options: ['Kekuatan, Kecepatan, Ketepatan, Lingkungan', 'Kesehatan, Keselamatan, Keberlanjutan, Lingkungan', 'Kualitas, Kuantitas, Keuangan, Laporan', 'Kerja, Karya, Karsa, Laba'],
+              correctAnswer: 1
+            },
+            {
+              id: 'qz2',
               text: 'Hierarki pengendalian risiko yang paling efektif adalah?',
               type: 'mcq',
               options: ['Penggunaan APD', 'Administrasi', 'Eliminasi', 'Rekayasa Teknik'],
               correctAnswer: 2
-            },
-            {
-              id: 'qz2',
-              text: 'Berapa ketinggian minimal bekerja yang wajib menggunakan Full Body Harness menurut standar umum?',
-              type: 'mcq',
-              options: ['1.5 meter', '1.8 meter', '2.5 meter', '3.0 meter'],
-              correctAnswer: 1
             }
           ]
         }
@@ -175,30 +175,33 @@ export const COURSES: Course[] = [
   },
   {
     id: 'c3',
-    title: 'Manajemen Konstruksi & Estimasi Biaya (RAB)',
-    description: 'Teknik penjadwalan (Kurva S), analisa harga satuan pekerjaan (AHSP), dan pengendalian biaya proyek.',
+    title: 'Manajemen Bisnis & Kewirausahaan Konstruksi',
+    description: 'Strategi manajerial badan usaha, kewirausahaan, manajemen finansial, dan tata kelola pelaksanaan bisnis jasa konstruksi.',
     instructor: 'Ir. Budi Santoso, MT',
-    thumbnail: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop',
+    thumbnail: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=800&auto=format&fit=crop',
     progress: 0,
-    category: 'Manajemen Proyek',
+    category: 'Bisnis & Kewirausahaan',
     studentsEnrolled: 2300,
     rating: 4.7,
     modules: [
-      { id: 'm7', title: 'Analisa Harga Satuan (AHSP 2024)', type: 'text', duration: '25:00', isCompleted: false, textContent: "# AHSP 2024\n\nAnalisa Harga Satuan Pekerjaan adalah kunci dalam menyusun RAB.\n\n**Rumus Dasar:**\n`Harga Satuan = (Koefisien x Harga Bahan) + (Koefisien x Upah) + (Koefisien x Alat)`" },
-      { id: 'm8', title: 'Penjadwalan Kurva S', type: 'video', duration: '20:00', isCompleted: false }
+      { id: 'm7', title: 'Kewirausahaan Jasa Konstruksi', type: 'text', duration: '25:00', isCompleted: false, textContent: "# Kewirausahaan Konstruksi\n\nMemahami lanskap bisnis konstruksi di Indonesia.\n\n**Topik Utama:**\n1. Legalitas Badan Usaha (SBU, NIB).\n2. Manajemen Cashflow Proyek.\n3. Strategi Pengembangan Pasar & Branding Kontraktor.\n4. Manajemen Risiko Bisnis." },
+      { id: 'm8', title: 'Manajemen Pelaksanaan Bisnis', type: 'video', duration: '20:00', isCompleted: false }
     ]
   },
   {
     id: 'c4',
-    title: 'Teknologi Beton Pracetak (Precast)',
-    description: 'Metode konstruksi beton pracetak untuk percepatan pembangunan infrastruktur jembatan dan gedung.',
+    title: 'Strategi Tender & Rantai Pasok (SCM)',
+    description: 'Manajemen rantai pasok (supply chain) material, strategi pemenangan tender, dan pengadaan pekerjaan konstruksi digital.',
     instructor: 'Dr. Eng. Ratna Sari',
-    thumbnail: 'https://images.unsplash.com/photo-1590075372533-3a62d96625cb?q=80&w=800&auto=format&fit=crop',
+    thumbnail: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop',
     progress: 0,
-    category: 'Struktur',
+    category: 'Tender & SCM',
     studentsEnrolled: 540,
     rating: 4.6,
-    modules: []
+    modules: [
+      { id: 'm9', title: 'Manajemen Rantai Pasok Konstruksi', type: 'video', duration: '15:00', isCompleted: false },
+      { id: 'm10', title: 'Strategi Pemenangan Tender', type: 'text', duration: '25:00', isCompleted: false, textContent: "# Strategi Tender Digital\n\nTips menyusun dokumen penawaran teknis dan biaya yang kompetitif.\n\n**Poin Penting:**\n- Analisis Dokumen Pemilihan.\n- Metode Pelaksanaan yang Efisien.\n- Perhitungan TKDN (Tingkat Komponen Dalam Negeri)." }
+    ]
   }
 ];
 
@@ -209,7 +212,7 @@ export const MOCK_STUDENT_PROGRESS: StudentProgress[] = [
     studentName: 'Ahmad Teknisi',
     studentAvatar: 'https://picsum.photos/100/100?random=3',
     courseId: 'c1',
-    courseTitle: 'Ahli K3 Konstruksi (Sertifikasi)',
+    courseTitle: 'Ahli K3 & 4KL Konstruksi Berkelanjutan',
     progress: 33,
     completedModuleIds: ['m1'],
     lastActive: new Date('2024-03-12T10:15:00'),
@@ -235,7 +238,7 @@ export const MOCK_STUDENT_PROGRESS: StudentProgress[] = [
     studentName: 'Dedi Surveyor',
     studentAvatar: 'https://picsum.photos/100/100?random=8',
     courseId: 'c3',
-    courseTitle: 'Manajemen Konstruksi & Estimasi Biaya',
+    courseTitle: 'Manajemen Bisnis & Kewirausahaan Konstruksi',
     progress: 5,
     completedModuleIds: [],
     lastActive: new Date('2024-02-28T09:00:00'),
@@ -248,9 +251,9 @@ export const MOCK_STUDENT_PROGRESS: StudentProgress[] = [
     studentName: 'Ahmad Teknisi',
     studentAvatar: 'https://picsum.photos/100/100?random=3',
     courseId: 'c4',
-    courseTitle: 'Teknologi Beton Pracetak',
+    courseTitle: 'Strategi Tender & Rantai Pasok (SCM)',
     progress: 100,
-    completedModuleIds: ['m10', 'm11'], // Mock IDs for completed history
+    completedModuleIds: ['m9', 'm10'],
     lastActive: new Date('2023-12-15T11:20:00'),
     quizAverage: 92,
     status: 'Completed'
@@ -260,7 +263,7 @@ export const MOCK_STUDENT_PROGRESS: StudentProgress[] = [
 export const MOCK_CERTIFICATES: Certificate[] = [
   {
     id: 'cert-001',
-    courseTitle: 'Pengawas Pekerjaan Jembatan',
+    courseTitle: 'Strategi Tender & Rantai Pasok (SCM)',
     studentName: 'Ahmad Teknisi',
     issueDate: new Date('2023-12-15'),
     instructor: 'Ir. Budi Santoso, MT',
@@ -268,7 +271,7 @@ export const MOCK_CERTIFICATES: Certificate[] = [
   },
   {
     id: 'cert-002',
-    courseTitle: 'Ahli Muda K3 Konstruksi',
+    courseTitle: 'Ahli K3 & 4KL Konstruksi Berkelanjutan',
     studentName: 'Ahmad Teknisi',
     issueDate: new Date('2024-02-20'),
     instructor: 'Dr. Eng. Ratna Sari',
@@ -287,10 +290,10 @@ export const MOCK_ANALYTICS: AnalyticsData[] = [
 ];
 
 export const COURSE_DISTRIBUTION: AnalyticsData[] = [
-  { name: 'K3 Safety', value: 35 },
+  { name: '4KL (Safety)', value: 35 },
   { name: 'Teknik Sipil', value: 30 },
-  { name: 'Manajemen', value: 20 },
-  { name: 'Arsitektur', value: 15 },
+  { name: 'Bisnis & Tender', value: 20 },
+  { name: 'SCM & Logistik', value: 15 },
 ];
 
 export const MOCK_COMMENTS: Comment[] = [
@@ -323,7 +326,7 @@ export const MOCK_COMMENTS: Comment[] = [
     userId: 'u5',
     userName: 'Dedi Surveyor',
     userAvatar: 'https://picsum.photos/100/100?random=8',
-    text: 'Mohon share format JSA (Job Safety Analysis) yang standar PU Pak.',
+    text: 'Mohon share format JSA (Job Safety Analysis) untuk limbah B3 Pak.',
     timestamp: new Date(Date.now() - 7200000), 
     likes: 5
   }

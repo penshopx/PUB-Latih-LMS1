@@ -21,6 +21,8 @@ export interface Question {
   type: 'mcq' | 'essay';
   options?: string[];
   correctAnswer?: number; // index for mcq
+  // Essay specific
+  rubric?: string;
 }
 
 export interface Quiz {
@@ -90,6 +92,7 @@ export interface ChatMessage {
   id: string;
   sender: 'user' | 'ai';
   text: string;
+  image?: string; // Base64 string
   timestamp: Date;
 }
 

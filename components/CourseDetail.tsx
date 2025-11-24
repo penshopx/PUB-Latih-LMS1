@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Course } from '../types';
 import { 
@@ -54,11 +53,11 @@ const CourseDetail: React.FC<CourseDetailProps> = ({ course, onBack, onEnroll, i
             </div>
             <div className="flex items-center gap-2">
               <Clock className="w-5 h-5" />
-              <span>~4 Weeks</span>
+              <span>~4 Minggu</span>
             </div>
             <div className="flex items-center gap-2">
               <Users className="w-5 h-5" />
-              <span>{course.studentsEnrolled.toLocaleString()} Students</span>
+              <span>{course.studentsEnrolled.toLocaleString()} Siswa</span>
             </div>
           </div>
         </div>
@@ -71,12 +70,12 @@ const CourseDetail: React.FC<CourseDetailProps> = ({ course, onBack, onEnroll, i
           
           {/* About */}
           <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-            <h2 className="text-xl font-bold text-slate-900 mb-4">What you'll learn</h2>
+            <h2 className="text-xl font-bold text-slate-900 mb-4">Apa yang akan Anda pelajari</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[1,2,3,4].map((i) => (
                 <div key={i} className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <p className="text-slate-600 text-sm">Comprehensive understanding of core concepts and advanced techniques.</p>
+                  <p className="text-slate-600 text-sm">Pemahaman komprehensif tentang konsep inti dan teknik lanjutan.</p>
                 </div>
               ))}
             </div>
@@ -84,7 +83,7 @@ const CourseDetail: React.FC<CourseDetailProps> = ({ course, onBack, onEnroll, i
 
           {/* Syllabus */}
           <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-            <h2 className="text-xl font-bold text-slate-900 mb-6">Course Syllabus</h2>
+            <h2 className="text-xl font-bold text-slate-900 mb-6">Silabus Kursus</h2>
             <div className="space-y-4">
               {course.modules.length > 0 ? course.modules.map((module, idx) => {
                  const isCompleted = progress?.completedModuleIds.includes(module.id);
@@ -98,13 +97,13 @@ const CourseDetail: React.FC<CourseDetailProps> = ({ course, onBack, onEnroll, i
                           <FileText className="w-5 h-5" />}
                       </div>
                       <div>
-                        <h4 className={`font-medium ${isCompleted ? 'text-slate-500 line-through' : 'text-slate-900'}`}>Module {idx + 1}: {module.title}</h4>
+                        <h4 className={`font-medium ${isCompleted ? 'text-slate-500 line-through' : 'text-slate-900'}`}>Modul {idx + 1}: {module.title}</h4>
                         <p className="text-xs text-slate-500">{module.type.toUpperCase()} • {module.duration}</p>
                       </div>
                     </div>
                     {isEnrolled ? (
                       <span className={`text-xs font-bold px-3 py-1 rounded-full ${isCompleted ? 'bg-green-100 text-green-600' : 'bg-indigo-50 text-indigo-600'}`}>
-                        {isCompleted ? 'Completed' : 'Unlocked'}
+                        {isCompleted ? 'Selesai' : 'Terbuka'}
                       </span>
                     ) : (
                       <Lock className="w-4 h-4 text-slate-400" />
@@ -112,7 +111,7 @@ const CourseDetail: React.FC<CourseDetailProps> = ({ course, onBack, onEnroll, i
                   </div>
                  );
               }) : (
-                <p className="text-slate-500 italic">Course modules are being updated.</p>
+                <p className="text-slate-500 italic">Modul kursus sedang diperbarui.</p>
               )}
             </div>
           </div>
@@ -122,28 +121,28 @@ const CourseDetail: React.FC<CourseDetailProps> = ({ course, onBack, onEnroll, i
         {/* Right Column: CTA */}
         <div className="lg:col-span-1">
           <div className="bg-white p-6 rounded-2xl shadow-xl border border-slate-200 sticky top-24">
-             <div className="text-3xl font-bold text-slate-900 mb-2">Free</div>
-             <p className="text-slate-500 text-sm mb-6">Full access to all course materials.</p>
+             <div className="text-3xl font-bold text-slate-900 mb-2">Gratis</div>
+             <p className="text-slate-500 text-sm mb-6">Akses penuh ke semua materi kursus.</p>
              
              <button 
                onClick={onEnroll}
                className="w-full py-4 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-600/20 active:scale-95 mb-4"
              >
-               {isEnrolled ? 'Go to Class' : 'Enroll Now'}
+               {isEnrolled ? 'Masuk Kelas' : 'Daftar Sekarang'}
              </button>
 
              <div className="space-y-4 text-sm text-slate-600">
                <div className="flex items-center gap-3">
                  <PlayCircle className="w-5 h-5 text-slate-400" />
-                 <span>On-demand video</span>
+                 <span>Video on-demand</span>
                </div>
                <div className="flex items-center gap-3">
                  <FileText className="w-5 h-5 text-slate-400" />
-                 <span>Access on mobile and TV</span>
+                 <span>Akses di ponsel dan TV</span>
                </div>
                <div className="flex items-center gap-3">
                  <Brain className="w-5 h-5 text-slate-400" />
-                 <span>Certificate of completion</span>
+                 <span>Sertifikat penyelesaian</span>
                </div>
              </div>
           </div>
